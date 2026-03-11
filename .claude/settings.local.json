@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(python -c \":*)",
+      "Bash(python -c \"import py_compile; py_compile.compile\\(''gui/recipe_editor.py'', doraise=True\\); print\\(''OK''\\)\")"
+    ]
+  }
+}

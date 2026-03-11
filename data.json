@@ -1,0 +1,101 @@
+{
+  "ingredients": [
+    {
+      "id": "28734a5d-e58a-440b-bbea-a3aba2c98035",
+      "name": "White Cedar",
+      "category": "wood",
+      "source_url": ""
+    },
+    {
+      "id": "e16b7623-c823-44cb-8db4-fd4023d4f26a",
+      "name": "Red Sandalwood",
+      "category": "wood",
+      "source_url": ""
+    },
+    {
+      "id": "6782f3ad-27f9-47f4-acca-757462388854",
+      "name": "Palo Santo",
+      "category": "wood",
+      "source_url": ""
+    },
+    {
+      "id": "669afba7-f50a-44ce-9010-1c96a849e254",
+      "name": "Frankincense",
+      "category": "resin",
+      "source_url": ""
+    },
+    {
+      "id": "9e70a6e2-31e2-4f2c-9b13-d5368e47e7ea",
+      "name": "Myrrh",
+      "category": "resin",
+      "source_url": ""
+    },
+    {
+      "id": "b342aba9-0265-4d27-86f3-8ca2f6e7db6d",
+      "name": "Benzoin",
+      "category": "resin",
+      "source_url": ""
+    },
+    {
+      "id": "00467ae4-77d4-46f1-b22c-366699d369e8",
+      "name": "Makko",
+      "category": "binder",
+      "source_url": ""
+    }
+  ],
+  "recipes": [
+    {
+      "id": "61002c0c-3834-42f0-a80f-82b788a04dbf",
+      "name": "New Recipe",
+      "notes": "",
+      "categories": [
+        {
+          "category": "wood",
+          "percentage": 38.8,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "6782f3ad-27f9-47f4-acca-757462388854",
+              "percentage": 24.4,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "e16b7623-c823-44cb-8db4-fd4023d4f26a",
+              "percentage": 75.6,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "resin",
+          "percentage": 25.6,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "669afba7-f50a-44ce-9010-1c96a849e254",
+              "percentage": 64.5,
+              "is_auto": true
+            },
+            {
+              "ingredient_id": "b342aba9-0265-4d27-86f3-8ca2f6e7db6d",
+              "percentage": 35.5,
+              "is_auto": false
+            }
+          ]
+        },
+        {
+          "category": "binder",
+          "percentage": 35.599999999999994,
+          "is_auto": true,
+          "ingredients": [
+            {
+              "ingredient_id": "00467ae4-77d4-46f1-b22c-366699d369e8",
+              "percentage": 100.0,
+              "is_auto": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
