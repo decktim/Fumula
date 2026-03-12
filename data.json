@@ -96,6 +96,364 @@
           ]
         }
       ]
+    },
+    {
+      "id": "9bd9017e-3b3d-4b61-bcbb-f09bb90eda2f",
+      "name": "Recipe A",
+      "notes": "",
+      "categories": [
+        {
+          "category": "wood",
+          "percentage": 36.0,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "28734a5d-e58a-440b-bbea-a3aba2c98035",
+              "percentage": 50.0,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "e16b7623-c823-44cb-8db4-fd4023d4f26a",
+              "percentage": 25.0,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "6782f3ad-27f9-47f4-acca-757462388854",
+              "percentage": 25.0,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "resin",
+          "percentage": 30.4,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "669afba7-f50a-44ce-9010-1c96a849e254",
+              "percentage": 74.0132,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "9e70a6e2-31e2-4f2c-9b13-d5368e47e7ea",
+              "percentage": 14.8026,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "b342aba9-0265-4d27-86f3-8ca2f6e7db6d",
+              "percentage": 11.1842,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "binder",
+          "percentage": 33.7,
+          "is_auto": true,
+          "ingredients": [
+            {
+              "ingredient_id": "00467ae4-77d4-46f1-b22c-366699d369e8",
+              "percentage": 100.0,
+              "is_auto": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b77e447c-9ecc-44ff-8b92-0210caba51bc",
+      "name": "Recipe B",
+      "notes": "",
+      "categories": [
+        {
+          "category": "wood",
+          "percentage": 40.0,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "28734a5d-e58a-440b-bbea-a3aba2c98035",
+              "percentage": 62.5,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "e16b7623-c823-44cb-8db4-fd4023d4f26a",
+              "percentage": 37.5,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "resin",
+          "percentage": 30.0,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "669afba7-f50a-44ce-9010-1c96a849e254",
+              "percentage": 33.3333,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "b342aba9-0265-4d27-86f3-8ca2f6e7db6d",
+              "percentage": 66.6667,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "binder",
+          "percentage": 30.0,
+          "is_auto": true,
+          "ingredients": [
+            {
+              "ingredient_id": "00467ae4-77d4-46f1-b22c-366699d369e8",
+              "percentage": 100.0,
+              "is_auto": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0ef84b96-4342-4c74-a7c0-efdd2d2f4107",
+      "name": "Recipe D",
+      "notes": "",
+      "categories": [
+        {
+          "category": "wood",
+          "percentage": 33.0,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "28734a5d-e58a-440b-bbea-a3aba2c98035",
+              "percentage": 60.6061,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "e16b7623-c823-44cb-8db4-fd4023d4f26a",
+              "percentage": 39.3939,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "resin",
+          "percentage": 37.0,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "669afba7-f50a-44ce-9010-1c96a849e254",
+              "percentage": 32.4324,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "9e70a6e2-31e2-4f2c-9b13-d5368e47e7ea",
+              "percentage": 18.9189,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "b342aba9-0265-4d27-86f3-8ca2f6e7db6d",
+              "percentage": 48.6486,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "binder",
+          "percentage": 30.0,
+          "is_auto": true,
+          "ingredients": [
+            {
+              "ingredient_id": "00467ae4-77d4-46f1-b22c-366699d369e8",
+              "percentage": 100.0,
+              "is_auto": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "13484a5e-9dbc-4add-811a-7c85f18fb9d6",
+      "name": "Recipe E",
+      "notes": "",
+      "categories": [
+        {
+          "category": "wood",
+          "percentage": 33.0,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "28734a5d-e58a-440b-bbea-a3aba2c98035",
+              "percentage": 39.3939,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "e16b7623-c823-44cb-8db4-fd4023d4f26a",
+              "percentage": 60.6061,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "resin",
+          "percentage": 37.0,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "669afba7-f50a-44ce-9010-1c96a849e254",
+              "percentage": 32.4324,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "9e70a6e2-31e2-4f2c-9b13-d5368e47e7ea",
+              "percentage": 18.9189,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "b342aba9-0265-4d27-86f3-8ca2f6e7db6d",
+              "percentage": 48.6486,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "binder",
+          "percentage": 30.0,
+          "is_auto": true,
+          "ingredients": [
+            {
+              "ingredient_id": "00467ae4-77d4-46f1-b22c-366699d369e8",
+              "percentage": 100.0,
+              "is_auto": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6b49fa86-2fb9-4412-996f-e627306b2927",
+      "name": "Recipe F",
+      "notes": "",
+      "categories": [
+        {
+          "category": "wood",
+          "percentage": 47.2,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "28734a5d-e58a-440b-bbea-a3aba2c98035",
+              "percentage": 27.9661,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "e16b7623-c823-44cb-8db4-fd4023d4f26a",
+              "percentage": 31.9915,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "6782f3ad-27f9-47f4-acca-757462388854",
+              "percentage": 40.0424,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "resin",
+          "percentage": 17.0,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "669afba7-f50a-44ce-9010-1c96a849e254",
+              "percentage": 22.3529,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "9e70a6e2-31e2-4f2c-9b13-d5368e47e7ea",
+              "percentage": 44.1176,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "b342aba9-0265-4d27-86f3-8ca2f6e7db6d",
+              "percentage": 33.5294,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "binder",
+          "percentage": 35.8,
+          "is_auto": true,
+          "ingredients": [
+            {
+              "ingredient_id": "00467ae4-77d4-46f1-b22c-366699d369e8",
+              "percentage": 100.0,
+              "is_auto": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fd5d9a9d-0b86-4725-b352-e076d30d6358",
+      "name": "Recipe G",
+      "notes": "",
+      "categories": [
+        {
+          "category": "wood",
+          "percentage": 40.0,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "28734a5d-e58a-440b-bbea-a3aba2c98035",
+              "percentage": 18.75,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "e16b7623-c823-44cb-8db4-fd4023d4f26a",
+              "percentage": 56.25,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "6782f3ad-27f9-47f4-acca-757462388854",
+              "percentage": 25.0,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "resin",
+          "percentage": 20.0,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "669afba7-f50a-44ce-9010-1c96a849e254",
+              "percentage": 24.0,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "9e70a6e2-31e2-4f2c-9b13-d5368e47e7ea",
+              "percentage": 42.5,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "b342aba9-0265-4d27-86f3-8ca2f6e7db6d",
+              "percentage": 33.5,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "binder",
+          "percentage": 40.0,
+          "is_auto": true,
+          "ingredients": [
+            {
+              "ingredient_id": "00467ae4-77d4-46f1-b22c-366699d369e8",
+              "percentage": 100.0,
+              "is_auto": true
+            }
+          ]
+        }
+      ]
     }
   ]
 }
