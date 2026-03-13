@@ -109,5 +109,5 @@ def import_data():
 
 
 if __name__ == "__main__":
-    print("Starting Incense Recipe Manager at http://localhost:5000")
+    print("Starting Fumula at http://localhost:5000")
     app.run(debug=True, port=5000)
