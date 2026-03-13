@@ -66,6 +66,7 @@ class RecipeCategory:
 class Recipe:
     name: str
     notes: str = ""
+    group: str = ""
     categories: list[RecipeCategory] = field(default_factory=list)
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
 
@@ -74,6 +75,7 @@ class Recipe:
             "id": self.id,
             "name": self.name,
             "notes": self.notes,
+            "group": self.group,
             "categories": [c.to_dict() for c in self.categories],
         }
 
@@ -83,5 +85,6 @@ class Recipe:
             id=d["id"],
             name=d["name"],
             notes=d.get("notes", ""),
+            group=d.get("group", ""),
             categories=[RecipeCategory.from_dict(c) for c in d.get("categories", [])],
         )

@@ -161,17 +161,42 @@ function renderRecipeList() {
     el.innerHTML = '<p class="text-muted small">No recipes yet.</p>';
     return;
   }
-  el.innerHTML = state.recipes.map(r => {
-    const composition = r.categories
-      .map(c => `${cap(c.category)} ${c.percentage.toFixed(0)}%`)
-      .join(' · ');
-    const active = r.id === state.selectedId ? 'active' : '';
-    return `
-      <div class="recipe-list-item p-2 rounded mb-1 ${active}" onclick="selectRecipe('${r.id}')">
-        <div class="fw-semibold">${esc(r.name)}</div>
-        <div class="text-muted small">${esc(composition)}</div>
-      </div>`;
-  }).join('');
+
+  const groupOrder = [];
+  const groupMap = {};
+  const ungrouped = [];
+  for (const r of state.recipes) {
+    if (r.group) {
+      if (!groupMap[r.group]) { groupMap[r.group] = []; groupOrder.push(r.group); }
+      groupMap[r.group].push(r);
+    } else {
+      ungrouped.push(r);
+    }
+  }
+
+  let html = '';
+  for (const groupName of groupOrder) {
+    html += `<div class="recipe-group-header">${esc(groupName)}</div>`;
+    html += groupMap[groupName].map(r => recipeListItemHTML(r, true)).join('');
+  }
+  if (ungrouped.length) {
+    if (groupOrder.length) html += `<div class="recipe-group-header">Other</div>`;
+    html += ungrouped.map(r => recipeListItemHTML(r, false)).join('');
+  }
+  el.innerHTML = html;
+}
+
+function recipeListItemHTML(r, indented) {
+  const composition = r.categories
+    .map(c => `${cap(c.category)} ${c.percentage.toFixed(0)}%`)
+    .join(' · ');
+  const active = r.id === state.selectedId ? 'active' : '';
+  const indent = indented ? ' indented' : '';
+  return `
+    <div class="recipe-list-item p-2 rounded mb-1${indent} ${active}" onclick="selectRecipe('${r.id}')">
+      <div class="fw-semibold">${esc(r.name)}</div>
+      <div class="text-muted small">${esc(composition)}</div>
+    </div>`;
 }
 
 function selectRecipe(id) {
@@ -338,16 +363,41 @@ async function deleteSelected() {
 }
 
 
+async function newVariant() {
+  if (!state.selectedId) return;
+  const source = state.recipes.find(r => r.id === state.selectedId);
+  if (!source) return;
+
+  let groupName = source.group;
+  if (!groupName) {
+    groupName = source.name;
+    await api('PUT', `/api/recipes/${source.id}`, { ...deepCopy(source), group: groupName });
+    await loadAll();
+    renderRecipeList();
+  }
+
+  const clone = deepCopy(source);
+  clone.id = null;
+  clone.name = source.name + ' (variant)';
+  clone.group = groupName;
+  openEditor(clone);
+}
+
+
 // ============================================================
 // RECIPE EDITOR
 // ============================================================
 function openEditor(recipe) {
-  editorMode  = recipe ? 'edit' : 'new';
+  editorMode  = (recipe?.id) ? 'edit' : 'new';
   editorDraft = recipe ? deepCopy(recipe) : blankRecipe();
 
-  document.getElementById('recipeModalTitle').textContent = recipe ? `Edit — ${recipe.name}` : 'New Recipe';
+  document.getElementById('recipeModalTitle').textContent = (recipe?.id) ? `Edit — ${recipe.name}` : 'New Recipe';
   document.getElementById('editor-name').value  = editorDraft.name;
   document.getElementById('editor-notes').value = editorDraft.notes;
+  document.getElementById('editor-group').value = editorDraft.group || '';
+
+  const groups = [...new Set(state.recipes.filter(r => r.group).map(r => r.group))];
+  document.getElementById('group-list').innerHTML = groups.map(g => `<option value="${esc(g)}">`).join('');
 
   renderEditorGroups();
   bsRecipeModal.show();
@@ -367,7 +417,7 @@ function blankRecipe() {
   const autoIdx = categories.findIndex(c => c.is_auto);
   const others = categories.reduce((s, c, i) => i !== autoIdx ? s + c.percentage : s, 0);
   categories[autoIdx].percentage = Math.max(0, 100 - others);
-  return { id: null, name: 'New Recipe', notes: '', categories };
+  return { id: null, name: 'New Recipe', notes: '', group: '', categories };
 }
 
 function renderEditorGroups() {
@@ -628,6 +678,7 @@ async function saveRecipe() {
   if (!name) { alert('Recipe name is required.'); return; }
   editorDraft.name  = name;
   editorDraft.notes = document.getElementById('editor-notes').value.trim();
+  editorDraft.group = document.getElementById('editor-group').value.trim();
 
   if (editorMode === 'edit') {
     await api('PUT', `/api/recipes/${editorDraft.id}`, editorDraft);
