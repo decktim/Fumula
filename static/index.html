@@ -24,15 +24,15 @@
 
 <ul class="nav nav-tabs px-3 pt-2 bg-light border-bottom" id="mainTabs">
   <li class="nav-item">
-    <a class="nav-link active" href="#" data-tab="ingredients">Ingredients</a>
+    <a class="nav-link active" href="#" data-tab="recipes">Recipes</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#" data-tab="recipes">Recipes</a>
+    <a class="nav-link" href="#" data-tab="ingredients">Ingredients</a>
   </li>
 </ul>
 
 <!-- ── Ingredients tab ─────────────────────────────────────────────────────── -->
-<div id="tab-ingredients" class="tab-pane p-3">
+<div id="tab-ingredients" class="tab-pane p-3 d-none">
   <div class="mb-2">
     <button class="btn btn-success btn-sm" onclick="showIngredientModal()">Add Ingredient</button>
   </div>
@@ -45,7 +45,7 @@
 </div>
 
 <!-- ── Recipes tab ─────────────────────────────────────────────────────────── -->
-<div id="tab-recipes" class="tab-pane p-3 d-none">
+<div id="tab-recipes" class="tab-pane p-3">
   <div class="mb-2 d-flex gap-2">
     <button class="btn btn-success btn-sm" onclick="openEditor(null)">New Recipe</button>
     <button class="btn btn-outline-secondary btn-sm" onclick="newVariant()">New Variant</button>
@@ -110,10 +110,12 @@
         </div>
 
         <div class="mb-3 row align-items-center">
-          <label class="col-sm-2 col-form-label fw-bold">Family</label>
+          <label class="col-sm-2 col-form-label fw-bold">Group</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="editor-group" list="group-list" placeholder="Optional — group related recipes">
-            <datalist id="group-list"></datalist>
+            <select class="form-select" id="editor-group" onchange="onGroupSelectChange()">
+              <option value="">— None —</option>
+            </select>
+            <input type="text" class="form-control mt-2 d-none" id="editor-group-new" placeholder="Enter new group name">
           </div>
         </div>
 

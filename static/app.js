@@ -180,7 +180,7 @@ function renderRecipeList() {
     html += groupMap[groupName].map(r => recipeListItemHTML(r, true)).join('');
   }
   if (ungrouped.length) {
-    if (groupOrder.length) html += `<div class="recipe-group-header">Other</div>`;
+    if (groupOrder.length) html += `<div class="recipe-group-header">Ungrouped</div>`;
     html += ungrouped.map(r => recipeListItemHTML(r, false)).join('');
   }
   el.innerHTML = html;
@@ -193,7 +193,8 @@ function recipeListItemHTML(r, indented) {
   const active = r.id === state.selectedId ? 'active' : '';
   const indent = indented ? ' indented' : '';
   return `
-    <div class="recipe-list-item p-2 rounded mb-1${indent} ${active}" onclick="selectRecipe('${r.id}')">
+    <div class="recipe-list-item p-2 rounded mb-1${indent} ${active}"
+         onclick="selectRecipe('${r.id}')" ondblclick="openEditor(state.recipes.find(r=>r.id==='${r.id}'))">
       <div class="fw-semibold">${esc(r.name)}</div>
       <div class="text-muted small">${esc(composition)}</div>
     </div>`;
@@ -394,10 +395,21 @@ function openEditor(recipe) {
   document.getElementById('recipeModalTitle').textContent = (recipe?.id) ? `Edit — ${recipe.name}` : 'New Recipe';
   document.getElementById('editor-name').value  = editorDraft.name;
   document.getElementById('editor-notes').value = editorDraft.notes;
-  document.getElementById('editor-group').value = editorDraft.group || '';
-
   const groups = [...new Set(state.recipes.filter(r => r.group).map(r => r.group))];
-  document.getElementById('group-list').innerHTML = groups.map(g => `<option value="${esc(g)}">`).join('');
+  const sel = document.getElementById('editor-group');
+  sel.innerHTML =
+    `<option value="">— None —</option>` +
+    groups.map(g => `<option value="${esc(g)}" ${editorDraft.group === g ? 'selected' : ''}>${esc(g)}</option>`).join('') +
+    `<option value="__new__">+ New group…</option>`;
+  if (editorDraft.group && !groups.includes(editorDraft.group)) {
+    // group came from a variant clone that doesn't exist yet — treat as new
+    sel.value = '__new__';
+    document.getElementById('editor-group-new').value = editorDraft.group;
+    document.getElementById('editor-group-new').classList.remove('d-none');
+  } else {
+    document.getElementById('editor-group-new').value = '';
+    document.getElementById('editor-group-new').classList.add('d-none');
+  }
 
   renderEditorGroups();
   bsRecipeModal.show();
@@ -671,6 +683,14 @@ function updateIngHeaderLabels() {
   });
 }
 
+// ---- Group select ---------------------------------------------------------
+
+function onGroupSelectChange() {
+  const isNew = document.getElementById('editor-group').value === '__new__';
+  document.getElementById('editor-group-new').classList.toggle('d-none', !isNew);
+  if (isNew) document.getElementById('editor-group-new').focus();
+}
+
 // ---- Save -----------------------------------------------------------------
 
 async function saveRecipe() {
@@ -678,7 +698,10 @@ async function saveRecipe() {
   if (!name) { alert('Recipe name is required.'); return; }
   editorDraft.name  = name;
   editorDraft.notes = document.getElementById('editor-notes').value.trim();
-  editorDraft.group = document.getElementById('editor-group').value.trim();
+  const groupSel = document.getElementById('editor-group').value;
+  editorDraft.group = groupSel === '__new__'
+    ? document.getElementById('editor-group-new').value.trim()
+    : groupSel;
 
   if (editorMode === 'edit') {
     await api('PUT', `/api/recipes/${editorDraft.id}`, editorDraft);
