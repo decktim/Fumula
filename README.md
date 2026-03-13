@@ -1,25 +1,45 @@
 # Fumula
 
-A web app for creating and managing incense recipes. Build recipes from ingredient categories, set proportions with interactive sliders, and generate printable recipe sheets.
+Fumula helps you track your incense ingredients, build recipes from them, and print measurement sheets.
+
+## What is Fumula?
+
+Fumula is a tool for managing incense recipes. It keeps track of the ingredients you have on hand, helps you create new recipes from those ingredients, and generates printable recipe sheets with gram measurements.
+
+Ingredients are organized into categories (wood, resin, binder, or any category you define). When building a recipe, you first set the blend of categories, then within each category set the blend of individual ingredients — all by percentage. When you print a recipe sheet, you specify one or more target batch sizes and the sheet calculates the gram amounts for every ingredient.
+
+Your data is stored in your browser — nothing is saved to a server. Use **Export JSON** to save a local backup at any time, and **Import JSON** to restore it later.
+
+A default profile with sample ingredients and recipes is available via **Load Defaults** (if configured). You can clear it and start fresh at any time.
 
 ## Features
 
-- Manage an ingredient library organized by category (wood, resin, binder, etc.)
-- Create recipes with category-level and per-ingredient percentage breakdowns
-- Auto-balancing: designate one member per group to automatically fill to 100%
+- Ingredient library organized by category (wood, resin, binder, or custom)
+- Recipes with category-level and per-ingredient percentage breakdowns
+- Auto-balancing: one member per group automatically fills to 100%
+- Group related recipes into families (e.g. two versions of the same base)
 - Visual donut chart showing recipe composition
-- Print recipe sheets as HTML tables with target gram calculations
+- Printable recipe sheets with target gram calculations
 - Export and import data as JSON
 
-## Usage
+## Running locally
 
-### Shared/deployed mode (each user has their own data in their browser)
+```bash
+pip install flask gunicorn
+python flask_app.py
+```
+
+Then open `http://localhost:5000`.
+
+## Usage modes
+
+### Shared/deployed mode (each user's data lives in their own browser)
 
 ```bash
 python flask_app.py
 ```
 
-Optionally provide a defaults file that new users will receive on their first visit:
+Optionally provide a defaults file that new users receive on first visit:
 
 ```bash
 python flask_app.py --defaults defaults.json
@@ -42,15 +62,6 @@ The file will be created if it doesn't exist. All changes are saved immediately.
 | Export JSON | Always | Downloads your data as a JSON file |
 | Import JSON | Always | Loads data from a JSON file |
 
-## Installation
-
-```bash
-pip install flask gunicorn
-python flask_app.py
-```
-
-Then open `http://localhost:5000`.
-
 ## Deployment (Render)
 
 Set the start command to:
@@ -58,4 +69,6 @@ Set the start command to:
 gunicorn flask_app:app
 ```
 
-To serve a defaults file on Render, commit `defaults.json` to the repo and set the environment variable `DEFAULTS_FILE=defaults.json` in Render's dashboard. The start command stays the same.
+To serve a defaults file on Render, commit `defaults.json` to the repo and set the environment variable `DEFAULTS_FILE=defaults.json` in Render's dashboard.
+
+> **Note:** Render's free tier spins down inactive services. If no one has accessed the app in a while, the first load may take a minute.

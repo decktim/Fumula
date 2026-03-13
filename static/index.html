@@ -19,6 +19,7 @@
       Import JSON
       <input type="file" accept=".json" style="display:none" onchange="importData(this)">
     </label>
+    <button class="btn btn-outline-light btn-sm" onclick="bsHelpModal.show()">?</button>
   </div>
 </nav>
 
@@ -158,6 +159,37 @@
       <div class="modal-footer">
         <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         <button class="btn btn-primary" onclick="generatePrint()">Generate &amp; Print</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Help modal ──────────────────────────────────────────────────────────── -->
+<div class="modal fade" id="helpModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Help</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Fumula helps you track your incense ingredients, build recipes from them, and print measurement sheets. Your data is stored in your browser — nothing is saved to a server. Use <strong>Export JSON</strong> to save a local backup and <strong>Import JSON</strong> to restore it.</p>
+
+        <h6 class="mt-4 mb-2">Ingredients</h6>
+        <p>Add ingredients in the <strong>Ingredients</strong> tab. Each ingredient belongs to a category (wood, resin, binder, or any category you define). Categories are used to organize the blending stages of a recipe.</p>
+
+        <h6 class="mt-4 mb-2">Recipes</h6>
+        <p>In the <strong>Recipes</strong> tab, create a recipe by setting what percentage of the batch each category makes up, then within each category which ingredients to use and in what ratio. One ingredient or category per group can be set to <strong>auto-fill</strong> (the ⟳ button) — it adjusts automatically to keep the total at 100%.</p>
+        <p>Related recipes (e.g. two versions of the same base) can be organized into a <strong>Group</strong> using the Group field in the editor. Use <strong>New Variant</strong> to clone the selected recipe into the same group.</p>
+
+        <h6 class="mt-4 mb-2">Printing</h6>
+        <p>Click <strong>Print</strong> to generate a recipe sheet. Enter one or more target batch sizes in grams (comma-separated) and the sheet will show gram amounts for every ingredient at each batch size.</p>
+
+        <h6 class="mt-4 mb-2">Data</h6>
+        <p><strong>Export JSON</strong> saves all your ingredients and recipes to a file. <strong>Import JSON</strong> loads them back. On a shared or deployed instance, each user's data is independent and lives in their own browser.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

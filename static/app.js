@@ -6,7 +6,7 @@ let editorDraft = null;   // deep-copy of recipe being edited (or blank new one)
 let editorMode  = 'new';  // 'new' | 'edit'
 
 // Bootstrap modal handles
-let bsIngredientModal, bsRecipeModal, bsPrintModal;
+let bsIngredientModal, bsRecipeModal, bsPrintModal, bsHelpModal;
 
 
 // ============================================================
@@ -931,6 +931,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   bsIngredientModal = new bootstrap.Modal(document.getElementById('ingredientModal'));
   bsRecipeModal     = new bootstrap.Modal(document.getElementById('recipeModal'));
   bsPrintModal      = new bootstrap.Modal(document.getElementById('printModal'));
+  bsHelpModal       = new bootstrap.Modal(document.getElementById('helpModal'));
 
   // Tab switching
   document.querySelectorAll('#mainTabs .nav-link').forEach(link => {
