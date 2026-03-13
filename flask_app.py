@@ -7,8 +7,8 @@ import storage
 from models import Ingredient, Recipe
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data-file', default=None)
-parser.add_argument('--defaults', default=None)
+parser.add_argument('--data-file', default=os.environ.get('DATA_FILE'))
+parser.add_argument('--defaults', default=os.environ.get('DEFAULTS_FILE'))
 args, _ = parser.parse_known_args()
 
 SERVER_MODE = args.data_file is not None

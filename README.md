@@ -58,7 +58,4 @@ Set the start command to:
 gunicorn flask_app:app
 ```
 
-To serve a defaults file on Render, commit `defaults.json` to the repo and set the start command to:
-```
-gunicorn flask_app:app -- --defaults defaults.json
-```
+To serve a defaults file on Render, commit `defaults.json` to the repo and set the environment variable `DEFAULTS_FILE=defaults.json` in Render's dashboard. The start command stays the same.
