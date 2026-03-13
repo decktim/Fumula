@@ -145,7 +145,13 @@
           "category": "binder",
           "percentage": 25,
           "is_auto": false,
-          "ingredients": []
+          "ingredients": [
+            {
+              "ingredient_id": "00467ae4-77d4-46f1-b22c-366699d369e8",
+              "percentage": 100,
+              "is_auto": true
+            }
+          ]
         }
       ]
     }
