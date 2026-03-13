@@ -1,0 +1,153 @@
+{
+  "ingredients": [
+    {
+      "id": "28734a5d-e58a-440b-bbea-a3aba2c98035",
+      "name": "White Cedar",
+      "category": "wood",
+      "source_url": ""
+    },
+    {
+      "id": "e16b7623-c823-44cb-8db4-fd4023d4f26a",
+      "name": "Red Sandalwood",
+      "category": "wood",
+      "source_url": ""
+    },
+    {
+      "id": "6782f3ad-27f9-47f4-acca-757462388854",
+      "name": "Palo Santo",
+      "category": "wood",
+      "source_url": ""
+    },
+    {
+      "id": "669afba7-f50a-44ce-9010-1c96a849e254",
+      "name": "Frankincense",
+      "category": "resin",
+      "source_url": ""
+    },
+    {
+      "id": "9e70a6e2-31e2-4f2c-9b13-d5368e47e7ea",
+      "name": "Myrrh",
+      "category": "resin",
+      "source_url": ""
+    },
+    {
+      "id": "b342aba9-0265-4d27-86f3-8ca2f6e7db6d",
+      "name": "Benzoin",
+      "category": "resin",
+      "source_url": ""
+    },
+    {
+      "id": "00467ae4-77d4-46f1-b22c-366699d369e8",
+      "name": "Makko",
+      "category": "binder",
+      "source_url": ""
+    }
+  ],
+  "recipes": [
+    {
+      "id": "fd5d9a9d-0b86-4725-b352-e076d30d6358",
+      "name": "Recipe A",
+      "notes": "",
+      "categories": [
+        {
+          "category": "wood",
+          "percentage": 40,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "28734a5d-e58a-440b-bbea-a3aba2c98035",
+              "percentage": 18.75,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "e16b7623-c823-44cb-8db4-fd4023d4f26a",
+              "percentage": 56.25,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "6782f3ad-27f9-47f4-acca-757462388854",
+              "percentage": 25,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "resin",
+          "percentage": 20,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "669afba7-f50a-44ce-9010-1c96a849e254",
+              "percentage": 24,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "9e70a6e2-31e2-4f2c-9b13-d5368e47e7ea",
+              "percentage": 42.5,
+              "is_auto": false
+            },
+            {
+              "ingredient_id": "b342aba9-0265-4d27-86f3-8ca2f6e7db6d",
+              "percentage": 33.5,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "binder",
+          "percentage": 40,
+          "is_auto": true,
+          "ingredients": [
+            {
+              "ingredient_id": "00467ae4-77d4-46f1-b22c-366699d369e8",
+              "percentage": 100,
+              "is_auto": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aa711c73-0e6d-42b8-ba7f-66250effa61f",
+      "name": "Recipe B",
+      "notes": "",
+      "categories": [
+        {
+          "category": "wood",
+          "percentage": 65,
+          "is_auto": true,
+          "ingredients": [
+            {
+              "ingredient_id": "e16b7623-c823-44cb-8db4-fd4023d4f26a",
+              "percentage": 82.7,
+              "is_auto": true
+            },
+            {
+              "ingredient_id": "6782f3ad-27f9-47f4-acca-757462388854",
+              "percentage": 17.3,
+              "is_auto": false
+            }
+          ]
+        },
+        {
+          "category": "resin",
+          "percentage": 10,
+          "is_auto": false,
+          "ingredients": [
+            {
+              "ingredient_id": "669afba7-f50a-44ce-9010-1c96a849e254",
+              "percentage": 100,
+              "is_auto": true
+            }
+          ]
+        },
+        {
+          "category": "binder",
+          "percentage": 25,
+          "is_auto": false,
+          "ingredients": []
+        }
+      ]
+    }
+  ]
+}

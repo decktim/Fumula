@@ -12,7 +12,63 @@ let bsIngredientModal, bsRecipeModal, bsPrintModal;
 // ============================================================
 // API HELPERS
 // ============================================================
+let SERVER_MODE = false;
+const LS_KEY = 'fumula_data';
+
+function lsLoad() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY)) || { ingredients: [], recipes: [] }; }
+  catch { return { ingredients: [], recipes: [] }; }
+}
+function lsSave(data) { localStorage.setItem(LS_KEY, JSON.stringify(data)); }
+
+function localApi(method, path, body) {
+  const data = lsLoad();
+
+  if (path === '/api/ingredients') {
+    if (method === 'GET') return data.ingredients;
+    if (method === 'POST') {
+      const item = { ...body, id: crypto.randomUUID() };
+      data.ingredients.push(item);
+      lsSave(data);
+      return item;
+    }
+  }
+  const ingMatch = path.match(/^\/api\/ingredients\/(.+)$/);
+  if (ingMatch) {
+    const id = ingMatch[1];
+    if (method === 'PUT') {
+      const idx = data.ingredients.findIndex(i => i.id === id);
+      if (idx !== -1) { data.ingredients[idx] = { ...body, id }; lsSave(data); return data.ingredients[idx]; }
+    }
+    if (method === 'DELETE') { data.ingredients = data.ingredients.filter(i => i.id !== id); lsSave(data); return null; }
+  }
+
+  if (path === '/api/recipes') {
+    if (method === 'GET') return data.recipes;
+    if (method === 'POST') {
+      const item = { ...body, id: crypto.randomUUID() };
+      data.recipes.push(item);
+      lsSave(data);
+      return item;
+    }
+  }
+  const recMatch = path.match(/^\/api\/recipes\/(.+)$/);
+  if (recMatch) {
+    const id = recMatch[1];
+    if (method === 'PUT') {
+      const idx = data.recipes.findIndex(r => r.id === id);
+      if (idx !== -1) { data.recipes[idx] = { ...body, id }; lsSave(data); return data.recipes[idx]; }
+    }
+    if (method === 'DELETE') { data.recipes = data.recipes.filter(r => r.id !== id); lsSave(data); return null; }
+  }
+
+  if (path === '/api/import' && method === 'POST') { lsSave(body); return null; }
+
+  throw new Error(`localApi: unhandled ${method} ${path}`);
+}
+
 async function api(method, path, body) {
+  if (!SERVER_MODE) return localApi(method, path, body);
   const opts = { method, headers: { 'Content-Type': 'application/json' } };
   if (body !== undefined) opts.body = JSON.stringify(body);
   const res = await fetch(path, opts);
@@ -352,7 +408,7 @@ function buildIngredientSection(rc) {
   groupDiv.id = `group-${rc.category}`;
   body.appendChild(groupDiv);
   if (rc.ingredients.length) {
-    renderPercentageGroup(`group-${rc.category}`, groupKey, rc.ingredients,
+    renderPercentageGroup(groupDiv, groupKey, rc.ingredients,
       (m) => ingName(m.ingredient_id));
   } else {
     groupDiv.innerHTML = '<p class="text-muted small">No ingredients added yet.</p>';
@@ -430,8 +486,10 @@ function rerenderIngredientSection(category) {
 
 // ---- Percentage group renderer ----------------------------------------
 
-function renderPercentageGroup(containerId, groupKey, members, labelFn) {
-  const container = document.getElementById(containerId);
+function renderPercentageGroup(containerOrId, groupKey, members, labelFn) {
+  const container = typeof containerOrId === 'string'
+    ? document.getElementById(containerOrId)
+    : containerOrId;
   if (!container) return;
   const autoIdx = members.findIndex(m => m.is_auto);
 
@@ -774,6 +832,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       switchTab(link.dataset.tab);
     });
   });
+
+  try {
+    const cfg = await fetch('/api/config').then(r => r.json());
+    SERVER_MODE = cfg.server_mode;
+  } catch { SERVER_MODE = false; }
 
   await loadAll();
   renderIngredients();

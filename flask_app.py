@@ -1,10 +1,18 @@
 from __future__ import annotations
-import sys, os, uuid
+import sys, os, uuid, argparse
 sys.path.insert(0, os.path.dirname(__file__))
 
 from flask import Flask, jsonify, request, send_from_directory, abort
 import storage
 from models import Ingredient, Recipe
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--data-file', default=None)
+args, _ = parser.parse_known_args()
+
+SERVER_MODE = args.data_file is not None
+if SERVER_MODE:
+    storage.DATA_FILE = os.path.abspath(args.data_file)
 
 app = Flask(__name__, static_folder="static", static_url_path="/static")
 
@@ -14,6 +22,13 @@ def _load():
 
 def _save(ingredients, recipes):
     storage.save_data(ingredients, recipes)
+
+
+# ── Config ────────────────────────────────────────────────────────────────────
+
+@app.route("/api/config")
+def config():
+    return jsonify({"server_mode": SERVER_MODE})
 
 
 # ── Static ────────────────────────────────────────────────────────────────────
