@@ -1,5 +1,5 @@
 from __future__ import annotations
-import sys, os, uuid, argparse
+import sys, os, uuid, argparse, json
 sys.path.insert(0, os.path.dirname(__file__))
 
 from flask import Flask, jsonify, request, send_from_directory, abort
@@ -8,9 +8,11 @@ from models import Ingredient, Recipe
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data-file', default=None)
+parser.add_argument('--defaults', default=None)
 args, _ = parser.parse_known_args()
 
 SERVER_MODE = args.data_file is not None
+DEFAULTS_FILE = os.path.abspath(args.defaults) if args.defaults else None
 if SERVER_MODE:
     storage.DATA_FILE = os.path.abspath(args.data_file)
 
@@ -28,7 +30,14 @@ def _save(ingredients, recipes):
 
 @app.route("/api/config")
 def config():
-    return jsonify({"server_mode": SERVER_MODE})
+    return jsonify({"server_mode": SERVER_MODE, "has_defaults": DEFAULTS_FILE is not None})
+
+@app.route("/api/defaults")
+def defaults():
+    if not DEFAULTS_FILE or not os.path.exists(DEFAULTS_FILE):
+        abort(404)
+    with open(DEFAULTS_FILE, "r", encoding="utf-8") as f:
+        return jsonify(json.load(f))
 
 
 # ── Static ────────────────────────────────────────────────────────────────────

@@ -12,6 +12,8 @@
 <nav class="navbar navbar-dark bg-dark px-3 d-flex justify-content-between">
   <span class="navbar-brand mb-0 h1">Fumula</span>
   <div class="d-flex gap-2">
+    <button id="btn-load-defaults" class="btn btn-outline-warning btn-sm d-none" onclick="loadDefaults()">Load Defaults</button>
+    <button id="btn-reset-data" class="btn btn-outline-danger btn-sm d-none" onclick="resetData()">Reset Data</button>
     <button class="btn btn-outline-light btn-sm" onclick="exportData()">Export JSON</button>
     <label class="btn btn-outline-light btn-sm mb-0" style="cursor:pointer">
       Import JSON

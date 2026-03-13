@@ -818,6 +818,39 @@ function deepCopy(obj) { return JSON.parse(JSON.stringify(obj)); }
 
 
 // ============================================================
+// DEFAULTS / RESET
+// ============================================================
+async function loadDefaults() {
+  if (!confirm('Load defaults? This will replace all your current data.')) return;
+  try {
+    const d = await fetch('/api/defaults').then(r => r.json());
+    lsSave(d);
+    state.selectedId = null;
+    await loadAll();
+    renderIngredients();
+    renderRecipeList();
+    document.getElementById('recipe-detail').innerHTML =
+      '<p class="text-muted mt-4 text-center">Select a recipe to see details</p>';
+  } catch { alert('Failed to load defaults.'); }
+}
+
+async function resetData() {
+  if (!confirm('Reset all data? This cannot be undone.')) return;
+  if (SERVER_MODE) {
+    await api('POST', '/api/import', { ingredients: [], recipes: [] });
+  } else {
+    lsSave({ ingredients: [], recipes: [] });
+  }
+  state.selectedId = null;
+  await loadAll();
+  renderIngredients();
+  renderRecipeList();
+  document.getElementById('recipe-detail').innerHTML =
+    '<p class="text-muted mt-4 text-center">Select a recipe to see details</p>';
+}
+
+
+// ============================================================
 // INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', async () => {
@@ -833,10 +866,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
+  let hasDefaults = false;
   try {
     const cfg = await fetch('/api/config').then(r => r.json());
     SERVER_MODE = cfg.server_mode;
+    hasDefaults = cfg.has_defaults;
   } catch { SERVER_MODE = false; }
+
+  // In localStorage mode: auto-load defaults on first visit
+  if (!SERVER_MODE && hasDefaults && !localStorage.getItem(LS_KEY)) {
+    try {
+      const d = await fetch('/api/defaults').then(r => r.json());
+      lsSave(d);
+    } catch {}
+  }
+
+  // Show/hide defaults button
+  const defaultsBtn = document.getElementById('btn-load-defaults');
+  if (defaultsBtn) defaultsBtn.classList.toggle('d-none', SERVER_MODE || !hasDefaults);
+  const resetBtn = document.getElementById('btn-reset-data');
+  if (resetBtn) resetBtn.classList.toggle('d-none', SERVER_MODE);
 
   await loadAll();
   renderIngredients();
