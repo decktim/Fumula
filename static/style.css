@@ -1,0 +1,163 @@
+/* Layout */
+.recipes-layout {
+  height: calc(100vh - 120px);
+  min-height: 400px;
+}
+
+.recipe-list-col {
+  width: 240px;
+  min-width: 180px;
+  flex-shrink: 0;
+}
+
+/* Recipe list items */
+.recipe-list-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  margin-bottom: 4px;
+  user-select: none;
+}
+
+.recipe-list-item:hover {
+  background: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+.recipe-list-item.active {
+  background: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+
+.recipe-list-item .recipe-item-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.recipe-list-item .recipe-item-cats {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.recipe-list-item.active .recipe-item-cats {
+  opacity: 0.85;
+}
+
+/* Detail panel */
+#recipe-detail {
+  min-width: 0;
+}
+
+#recipe-detail .detail-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+#recipe-detail .detail-notes {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+}
+
+/* Chart */
+#detail-chart-wrap {
+  max-width: 420px;
+}
+
+#detail-chart-wrap canvas {
+  display: block;
+}
+
+#chart-legend {
+  font-size: 0.8rem;
+  gap: 8px 16px;
+}
+
+#chart-legend .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+#chart-legend .legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Editor percentage group rows */
+.pct-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pct-row .label-col {
+  width: 130px;
+  min-width: 100px;
+  font-size: 0.875rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pct-row input[type="range"] {
+  flex: 1;
+  min-width: 80px;
+}
+
+.pct-row input[type="number"] {
+  width: 72px;
+  text-align: right;
+}
+
+.pct-row .auto-icon {
+  width: 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #6c757d;
+  flex-shrink: 0;
+}
+
+/* Ingredient section cards */
+.ingredient-section-card .card-header {
+  font-size: 0.875rem;
+  padding: 6px 12px;
+}
+
+.ingredient-section-card .card-body {
+  padding: 10px 12px;
+}
+
+/* Add ingredient row */
+.add-ing-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #dee2e6;
+}
+
+.add-ing-row select {
+  flex: 1;
+  font-size: 0.85rem;
+}
+
+/* Remove button inline */
+.pct-row .btn-remove {
+  padding: 0 5px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+/* Print output — used in generated HTML only */
+@media print {
+  .no-print { display: none !important; }
+}
