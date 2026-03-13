@@ -94,6 +94,20 @@ def delete_recipe(id):
     return "", 204
 
 
+# ── Import / Export ───────────────────────────────────────────────────────────
+
+@app.route("/api/import", methods=["POST"])
+def import_data():
+    data = request.json
+    try:
+        ings = [Ingredient.from_dict(d) for d in data["ingredients"]]
+        recipes = [Recipe.from_dict(d) for d in data["recipes"]]
+    except (KeyError, TypeError):
+        abort(400)
+    _save(ings, recipes)
+    return "", 204
+
+
 if __name__ == "__main__":
     print("Starting Incense Recipe Manager at http://localhost:5000")
     app.run(debug=True, port=5000)

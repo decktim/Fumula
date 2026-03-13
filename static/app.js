@@ -719,6 +719,34 @@ function generatePrint() {
 
 
 // ============================================================
+// IMPORT / EXPORT
+// ============================================================
+function exportData() {
+  const json = JSON.stringify({ ingredients: state.ingredients, recipes: state.recipes }, null, 2);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+  a.download = 'incense_data.json';
+  a.click();
+}
+
+async function importData(input) {
+  const file = input.files[0];
+  if (!file) return;
+  input.value = '';
+  const text = await file.text();
+  let data;
+  try { data = JSON.parse(text); } catch { alert('Invalid JSON file.'); return; }
+  if (!data.ingredients || !data.recipes) { alert('File missing ingredients or recipes.'); return; }
+  await api('POST', '/api/import', data);
+  state.ingredients = data.ingredients;
+  state.recipes = data.recipes;
+  state.selectedId = null;
+  renderIngredients();
+  renderRecipeList();
+  document.getElementById('recipe-detail').innerHTML = '<p class="text-muted mt-4 text-center">Select a recipe to see details</p>';
+}
+
+// ============================================================
 // UTILITIES
 // ============================================================
 function esc(s) {

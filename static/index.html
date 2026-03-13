@@ -9,8 +9,15 @@
 </head>
 <body>
 
-<nav class="navbar navbar-dark bg-dark px-3">
+<nav class="navbar navbar-dark bg-dark px-3 d-flex justify-content-between">
   <span class="navbar-brand mb-0 h1">Incense Recipe Manager</span>
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-light btn-sm" onclick="exportData()">Export JSON</button>
+    <label class="btn btn-outline-light btn-sm mb-0" style="cursor:pointer">
+      Import JSON
+      <input type="file" accept=".json" style="display:none" onchange="importData(this)">
+    </label>
+  </div>
 </nav>
 
 <ul class="nav nav-tabs px-3 pt-2 bg-light border-bottom" id="mainTabs">
