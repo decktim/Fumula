@@ -11,7 +11,7 @@
 
 <nav class="navbar navbar-dark bg-dark px-3 d-flex justify-content-between">
   <span class="navbar-brand mb-0 h1">Fumula</span>
-  <div class="d-flex gap-2">
+  <div class="d-flex gap-2 navbar-actions">
     <button id="btn-load-defaults" class="btn btn-outline-warning btn-sm d-none" onclick="loadDefaults()">Load Defaults</button>
     <button id="btn-reset-data" class="btn btn-outline-danger btn-sm d-none" onclick="resetData()">Reset Data</button>
     <button class="btn btn-outline-light btn-sm" onclick="exportData()">Export JSON</button>
@@ -47,7 +47,7 @@
 
 <!-- ── Recipes tab ─────────────────────────────────────────────────────────── -->
 <div id="tab-recipes" class="tab-pane p-3">
-  <div class="mb-2 d-flex gap-2">
+  <div class="mb-2 d-flex gap-2 recipe-toolbar">
     <button class="btn btn-success btn-sm" onclick="openEditor(null)">New Recipe</button>
     <button class="btn btn-outline-secondary btn-sm" onclick="newVariant()">New Variant</button>
     <button class="btn btn-info btn-sm"    onclick="editSelected()">Edit</button>

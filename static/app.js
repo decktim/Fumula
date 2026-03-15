@@ -205,15 +205,27 @@ function selectRecipe(id) {
   renderRecipeList();
   const recipe = state.recipes.find(r => r.id === id);
   renderRecipeDetail(recipe);
+  if (window.innerWidth < 768) {
+    const layout = document.querySelector('.recipes-layout');
+    layout.classList.remove('mobile-show-list');
+    layout.classList.add('mobile-show-detail');
+  }
+}
+
+function backToList() {
+  const layout = document.querySelector('.recipes-layout');
+  layout.classList.remove('mobile-show-detail');
+  layout.classList.add('mobile-show-list');
 }
 
 function renderRecipeDetail(recipe) {
   const el = document.getElementById('recipe-detail');
   el.innerHTML = `
+    <button id="detail-back-btn" class="btn btn-sm btn-outline-secondary mb-3" onclick="backToList()">← Back</button>
     <h4 class="mb-1">${esc(recipe.name)}</h4>
     ${recipe.notes ? `<p class="text-muted mb-3">${esc(recipe.notes)}</p>` : '<p class="mb-3"></p>'}
-    <div class="d-flex align-items-start gap-4">
-      <div style="width:620px;flex-shrink:0;">
+    <div class="detail-top-section">
+      <div class="detail-chart-wrap">
         <canvas id="detail-chart"></canvas>
       </div>
       <div id="detail-legend" class="pt-1"></div>
@@ -361,6 +373,7 @@ async function deleteSelected() {
   renderRecipeList();
   document.getElementById('recipe-detail').innerHTML =
     '<p class="text-muted mt-4 text-center">Select a recipe to see details</p>';
+  if (window.innerWidth < 768) backToList();
 }
 
 
@@ -965,4 +978,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadAll();
   renderIngredients();
   renderRecipeList();
+
+  // Initialize mobile master-detail state
+  if (window.innerWidth < 768) {
+    document.querySelector('.recipes-layout').classList.add('mobile-show-list');
+  }
 });

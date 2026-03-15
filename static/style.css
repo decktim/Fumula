@@ -1,6 +1,6 @@
 /* Layout */
 .recipes-layout {
-  height: calc(100vh - 120px);
+  height: calc(100dvh - 120px);
   min-height: 400px;
 }
 
@@ -84,8 +84,16 @@
 }
 
 /* Chart */
-#detail-chart-wrap {
-  max-width: 420px;
+.detail-top-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.detail-chart-wrap {
+  width: 420px;
+  flex-shrink: 0;
 }
 
 #detail-chart-wrap canvas {
@@ -182,4 +190,80 @@
 /* Print output — used in generated HTML only */
 @media print {
   .no-print { display: none !important; }
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* Navbar: wrap buttons onto a second line */
+  .navbar-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 4px !important;
+    padding-bottom: 4px;
+  }
+
+  /* Recipe toolbar: wrap buttons */
+  .recipe-toolbar {
+    flex-wrap: wrap;
+  }
+
+  /* Stack the recipe list + detail vertically; natural height */
+  .recipes-layout {
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+  }
+
+  /* Master-detail panel show/hide */
+  .recipes-layout.mobile-show-detail #recipe-list { display: none !important; }
+  .recipes-layout.mobile-show-list  #recipe-detail { display: none !important; }
+
+  .recipe-list-col {
+    width: 100%;
+    min-width: 0;
+    border-right: none !important;
+    padding-right: 0 !important;
+  }
+
+  #recipe-detail {
+    width: 100%;
+  }
+
+  /* Back button: visible only on mobile */
+  #detail-back-btn { display: inline-flex; }
+
+  /* Chart: full-width on mobile, stacked below legend */
+  .detail-chart-wrap {
+    width: 100%;
+    max-width: 400px;
+    flex-shrink: 1;
+  }
+
+  .detail-top-section {
+    flex-direction: column;
+  }
+
+  /* Percentage rows: shrink label, allow slider to compress */
+  .label-col {
+    width: 90px;
+    min-width: 60px;
+  }
+
+  .pct-row input[type="range"] {
+    min-width: 40px;
+  }
+
+  .pct-row input[type="number"] {
+    width: 60px;
+  }
+
+  /* Ingredients table: horizontal scroll */
+  #tab-ingredients {
+    overflow-x: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  /* Back button: hidden on desktop */
+  #detail-back-btn { display: none !important; }
 }
