@@ -229,8 +229,45 @@ function renderRecipeDetail(recipe) {
         <canvas id="detail-chart"></canvas>
       </div>
       <div id="detail-legend" class="pt-1"></div>
+    </div>
+    <div class="mt-4">
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <label class="form-label mb-0 fw-semibold">Batch size:</label>
+        <input type="number" id="detail-multiplier" class="form-control form-control-sm" style="width:90px"
+               min="0" step="any" value="10" oninput="updateDetailTable()">
+        <span class="text-muted small">g</span>
+      </div>
+      <table class="table table-sm table-hover align-middle">
+        <thead class="table-light">
+          <tr><th>Ingredient</th><th>Category</th><th class="text-end">%</th><th class="text-end">Amount</th></tr>
+        </thead>
+        <tbody id="detail-table-body"></tbody>
+      </table>
     </div>`;
   renderChart(recipe);
+  updateDetailTable();
+}
+
+function updateDetailTable() {
+  const recipe = state.recipes.find(r => r.id === state.selectedId);
+  if (!recipe) return;
+  const multiplier = parseFloat(document.getElementById('detail-multiplier')?.value) || 0;
+  const tbody = document.getElementById('detail-table-body');
+  if (!tbody) return;
+  const rows = [];
+  for (const rc of recipe.categories) {
+    for (const ri of rc.ingredients) {
+      const absPct = rc.percentage * ri.percentage / 100;
+      if (absPct <= 0) continue;
+      rows.push(`<tr>
+        <td>${esc(ingName(ri.ingredient_id))}</td>
+        <td>${esc(cap(rc.category))}</td>
+        <td class="text-end">${absPct.toFixed(1)}%</td>
+        <td class="text-end">${(absPct / 100 * multiplier).toFixed(3)}g</td>
+      </tr>`);
+    }
+  }
+  tbody.innerHTML = rows.join('') || '<tr><td colspan="4" class="text-muted text-center">No ingredients</td></tr>';
 }
 
 function renderChart(recipe) {
