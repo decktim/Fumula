@@ -2,7 +2,7 @@ from __future__ import annotations
 import sys, os, uuid, argparse, json
 sys.path.insert(0, os.path.dirname(__file__))
 
-from flask import Flask, jsonify, request, send_from_directory, abort
+from flask import Flask, jsonify, request, send_from_directory, abort, redirect
 import storage
 from models import Ingredient, Recipe
 
@@ -44,7 +44,7 @@ def defaults():
 
 @app.route("/")
 def index():
-    return send_from_directory("static", "index.html")
+    return redirect("/static/index.html")
 
 
 # ── Ingredients ───────────────────────────────────────────────────────────────
@@ -134,4 +134,4 @@ def import_data():
 
 if __name__ == "__main__":
     print("Starting Fumula at http://localhost:5000")
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host="0.0.0.0", port=5000)

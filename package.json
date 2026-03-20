@@ -1,0 +1,25 @@
+{
+  "name": "incense3",
+  "version": "1.0.0",
+  "description": "Fumula helps you track your incense ingredients, build recipes from them, and print measurement sheets.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/decktim/Fumula.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/decktim/Fumula/issues"
+  },
+  "homepage": "https://github.com/decktim/Fumula#readme",
+  "dependencies": {
+    "@capacitor/android": "^8.2.0",
+    "@capacitor/cli": "^8.2.0",
+    "@capacitor/core": "^8.2.0"
+  }
+}

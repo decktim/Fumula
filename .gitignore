@@ -1,5 +1,18 @@
 .claude/
 timrecipes.json
+data.json
+
+# Node / Capacitor
+node_modules/
+package-lock.json
+
+# Android build artifacts
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties
+*.apk
+*.aab
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

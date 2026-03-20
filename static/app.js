@@ -999,9 +999,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch { SERVER_MODE = false; }
 
   // In localStorage mode: auto-load defaults on first visit
-  if (!SERVER_MODE && hasDefaults && !localStorage.getItem(LS_KEY)) {
+  if (!SERVER_MODE && !localStorage.getItem(LS_KEY)) {
     try {
-      const d = await fetch('/api/defaults').then(r => r.json());
+      // Try API first (Flask running), then fall back to static file (PWA offline)
+      const url = hasDefaults ? '/api/defaults' : './defaults.json';
+      const d = await fetch(url).then(r => r.ok ? r.json() : Promise.reject());
       lsSave(d);
     } catch {}
   }
