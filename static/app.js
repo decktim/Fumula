@@ -903,10 +903,24 @@ function generatePrint() {
 // ============================================================
 // IMPORT / EXPORT
 // ============================================================
-function exportData() {
+async function exportData() {
   const json = JSON.stringify({ ingredients: state.ingredients, recipes: state.recipes }, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  if (navigator.share) {
+    const file = new File([blob], 'incense_data.json', { type: 'application/json' });
+    try {
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: 'incense_data.json' });
+      } else {
+        await navigator.share({ title: 'incense_data.json', text: json });
+      }
+      return;
+    } catch (e) {
+      if (e.name === 'AbortError') return;
+    }
+  }
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+  a.href = URL.createObjectURL(blob);
   a.download = 'incense_data.json';
   a.click();
 }
